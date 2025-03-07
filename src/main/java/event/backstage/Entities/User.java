@@ -2,6 +2,7 @@ package event.backstage.Entities;
 
 import jakarta.persistence.*;
 
+
 @Entity
 public class User {
     @Id
@@ -9,32 +10,59 @@ public class User {
     private int id ;
     @Lob
     private String campanyName ;
+    @OneToOne(mappedBy = "user")
+    private Event create;
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", campanyName='" + campanyName + '\'' +
+                ", PortalName='" + PortalName + '\'' +
+                ", subDomain='" + subDomain + '\'' +
                 ", email='" + email + '\'' +
                 ", pnumber=" + pnumber +
                 ", password='" + password + '\'' +
                 '}';
     }
 
-    public User(int id, String campanyName, String email, long pnumber, String password) {
-
+    public User(int id, String campanyName, String portalName, String subDomain, String email, long pnumber, String password) {
         this.id = id;
         this.campanyName = campanyName;
+        PortalName = portalName;
+        this.subDomain = subDomain;
         this.email = email;
         this.pnumber = pnumber;
         this.password = password;
     }
 
+    public String getPortalName() {
+        return PortalName;
+    }
+
+    public void setPortalName(String portalName) {
+        PortalName = portalName;
+    }
+
+    public String getSubDomain() {
+        return subDomain;
+    }
+
+    public void setSubDomain(String subDomain) {
+        this.subDomain = subDomain;
+    }
+    @Column(unique = true)
+    private String PortalName ="Event" ;
+    @Column(unique = true)
+    private String subDomain  = "Event" ;
+
+
     public User() {
         super() ;
     }
- @Column(unique = true)
+    @Column(unique = true)
     private String email ;
+    @Column(unique = true)
     private long pnumber;
     private String  password ;
 

@@ -80,27 +80,31 @@
                         </div>
 
                         <!-- Date and Time -->
-                        <div class="col-12">
-                            <label class="form-label">Date and Time</label>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <input type="date" class="form-control" value="2025-02-28">
-                                        <span class="input-group-text">
-                                            <i class="bi bi-calendar"></i>
-                                        </span>
+                       <div class="col-12">
+                           <label class="form-label">Date and Time</label>
+                           <div class="d-flex gap-3">
+                               <div class="flex-fill">
+                                   <div class="input-group">
+                                       <input type="date" class="form-control" value="2025-02-28">
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="input-group">
-                                        <input type="time" class="form-control" value="08:00">
-                                        <span class="input-group-text">
-                                            <i class="bi bi-clock"></i>
-                                        </span>
+                               </div>
+                               <div class="flex-fill">
+                                   <div class="input-group">
+                                       <input type="time" class="form-control" value="08:00">
+                                   </div>
+                               </div>
+                               <div class="flex-fill">
+                                   <div class="input-group">
+                                       <input type="date" class="form-control" value="2025-02-28">
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                               </div>
+                               <div class="flex-fill">
+                                   <div class="input-group">
+                                       <input type="time" class="form-control" value="08:00">
+                                       </div>
+                               </div>
+                           </div>
+                       </div>
 
                         <!-- Website Access -->
                         <div class="col-12">

@@ -3,6 +3,7 @@ package event.backstage.Eventify;
 
 
 import event.backstage.Entities.User;
+import jakarta.servlet.http.HttpSession;
 import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -10,6 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.Optional;
 
 @Controller
@@ -27,7 +31,8 @@ public String signup(){
         return "Signup";
 }
 @PostMapping("/Signup")
-public String register(@RequestParam String campanyName ,@RequestParam String email,@RequestParam long pnumber,@RequestParam String password ,   @ModelAttribute("user") User user , @RequestParam(value = "agreement" , defaultValue = "false") boolean agreement ,  Model modal ){
+public String register( HttpSession session , @RequestParam String campanyName ,@RequestParam String email,@RequestParam long pnumber,@RequestParam String password ,   @ModelAttribute("user") User user , @RequestParam(value = "agreement" , defaultValue = "false") boolean agreement ,  Model modal ){
+    session.setAttribute("username", email);
    User user1 = new User() ;
    user1.setCampanyName(campanyName);
    user1.setEmail(email);
@@ -36,7 +41,7 @@ public String register(@RequestParam String campanyName ,@RequestParam String em
    userRepository.save(user1) ;
 
         System.out.println(user );
-    return "Signin" ;
+    return "afterlogin" ;
 }
 
      @RequestMapping("/Signin")
@@ -45,7 +50,8 @@ public String register(@RequestParam String campanyName ,@RequestParam String em
      }
 
      @PostMapping("/Signin")
-    public String signinhandler(@RequestParam String username, @RequestParam String password) {
+    public String signinhandler(  @RequestParam String username, @RequestParam String password) {
+
 
           Optional<User> optional =  userRepository.findByEmailAndPassword(username , password)  ;
 //          User user = optional.get() ;
@@ -53,7 +59,7 @@ public String register(@RequestParam String campanyName ,@RequestParam String em
         if(optional.isPresent() ){
             System.out.println(username+" " + password +" " );
 
-            return "afterlogin" ;
+            return "running" ;
            }else{
             return "Signin" ; // signin.jsp should display the error message
         }
@@ -74,12 +80,37 @@ public String register(@RequestParam String campanyName ,@RequestParam String em
 
         }
 
-        @RequestMapping("/afterlogin")
-     public String afterlogin(){
-        return "afterlogin" ;
+//        @RequestMapping("/afterlogin")
+//     public String afterlogin(){
+//        return "afterlogin" ;
+//        }
+    @PostMapping("/afterlogin")
+    public String afterlogindata(@RequestParam String portalName , @RequestParam String  subdomain ,HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        session.invalidate();
+        System.out.println(username);
+        if (username != null) {
+            Optional<User> optional = userRepository.findByEmail(username);
+            System.out.println(optional);
+            User user = optional.get() ;
+            user.setPortalName(portalName);
+            user.setSubDomain(subdomain);
+            userRepository.save(user) ;
+            return "running" ;
+        }else {
+            return "Signin" ;
         }
+
+    }
+    @PostMapping("/createbuttonpopup")
+    public  String createpopup(@RequestParam String eventName , @RequestParam LocalDate StartDate , @RequestParam LocalDate EndDate , @RequestParam LocalTime StartTime , @RequestParam LocalTime EndTime){
+       System.out.println(eventName);
+
+        return "Manage-Event-info" ;
+    }
         @RequestMapping("/running")
          public String runing(){
+
         return "running" ;
         }
     @RequestMapping("/live")

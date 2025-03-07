@@ -126,16 +126,16 @@
                 </p>
             </div>
 
-            <form>
+            <form method = "post" action = "/afterlogin">
                 <div class="mb-4">
                     <label for="portalName" class="form-label">Portal Name:</label>
-                    <input type="text" class="form-control" id="portalName" placeholder="Portal Name">
+                    <input type="text" class="form-control" name = "portalName"  id="portalName" placeholder="Portal Name" required>
                     <div class="form-text">A name for a group of your events</div>
                 </div>
 
                 <div class="mb-4">
                     <label for="subdomain" class="form-label">Subdomain:</label>
-                    <input type="text" class="form-control" id="subdomain" placeholder="Subdomain">
+                    <input type="text" class="form-control" name = "subdomain" id="subdomain" placeholder="Subdomain" required>
                     <div class="form-text">
                         Your events will be hosted on the following free and secure subdomain:<br>
                         https://<span class="subdomain-text">subdomain</span>.eventifybackstage.in
