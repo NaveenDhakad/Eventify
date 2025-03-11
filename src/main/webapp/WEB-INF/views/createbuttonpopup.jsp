@@ -89,6 +89,7 @@
                                                 <i class="bi bi-camera-video"></i>
                                             </div>
                                         </div>
+
                                         <small class="text-muted">Host a digital event that engages participants who join remotely</small>
                                     </div>
                                 </div>

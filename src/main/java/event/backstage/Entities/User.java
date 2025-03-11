@@ -11,7 +11,8 @@ public class User {
     @Lob
     private String campanyName ;
     @OneToOne(mappedBy = "user")
-    private Event create;
+    private Event event;
+
 
     @Override
     public String toString() {
